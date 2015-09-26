@@ -55,7 +55,7 @@ public:
   NameServer(const Name& zoneName, const Name& certName, Face& face, DbMgr& dbMgr,
              KeyChain& keyChain, Validator& validator);
 
-NDNS_PUBLIC_WITH_TESTS_ELSE_PRIVATE:
+private:
   void
   onInterest(const Name& prefix, const Interest &interest);
 

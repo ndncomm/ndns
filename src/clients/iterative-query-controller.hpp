@@ -72,7 +72,7 @@ public:
   virtual bool
   hasEnded();
 
-NDNS_PUBLIC_WITH_TESTS_ELSE_PRIVATE:
+private:
   void
   onData(const ndn::Interest& interest, const Data& data);
 
