@@ -29,7 +29,7 @@ namespace ndn {
 namespace ndns {
 NDNS_LOG_INIT("validator");
 
-std::string Validator::VALIDATOR_CONF_FILE = DEFAULT_CONFIG_PATH "/" "validator.conf";
+std::string Validator::VALIDATOR_CONF_FILE = " "; // FIXME // DEFAULT_CONFIG_PATH "/" "validator.conf";
 
 Validator::Validator(Face& face, const std::string& confFile /* = VALIDATOR_CONF_FILE */)
   : ValidatorConfig(face)
@@ -70,7 +70,8 @@ Validator::Validator(Face& face, const std::string& confFile /* = VALIDATOR_CONF
       "  file-name \""
       ;
 
-    config += DEFAULT_CONFIG_PATH "/" "anchors/root.cert";
+    // FIXME
+    // config += DEFAULT_CONFIG_PATH "/" "anchors/root.cert";
 
     config +=
       "\"                                                                         \n"

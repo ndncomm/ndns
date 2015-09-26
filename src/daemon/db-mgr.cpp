@@ -53,8 +53,9 @@ DbMgr::DbMgr(const std::string& dbFile/* = DEFAULT_CONFIG_PATH "/" "ndns.db"*/)
   : m_dbFile(dbFile)
   , m_conn(0)
 {
-  if (dbFile.empty())
-    m_dbFile = DEFAULT_DATABASE_PATH "/" "ndns.db";
+  // if (dbFile.empty())
+  //   m_dbFile = DEFAULT_DATABASE_PATH "/" "ndns.db";
+  // FIXME
 
   this->open();
 

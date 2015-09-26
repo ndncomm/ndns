@@ -138,7 +138,7 @@ NameServer::handleUpdate(const Name& prefix, const Interest& interest, const lab
                          bind(&NameServer::doUpdate, this, interest.shared_from_this(), data),
                          [this] (const shared_ptr<const Data>& data, const std::string& msg) {
                            NDNS_LOG_WARN("Ignoring update that did not pass the verification. "
-                                         << "Check the root certificate")
+                                         << "Check the root certificate");
                          });
   }
 }

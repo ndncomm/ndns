@@ -37,18 +37,18 @@ namespace log {
 void
 init(const std::string& configFile/*= DEFAULT_CONFIG_PATH "/" "log4cxx.properties"*/)
 {
-  using namespace log4cxx;
-  using namespace log4cxx::helpers;
+  // using namespace log4cxx;
+  // using namespace log4cxx::helpers;
 
-  if (access(configFile.c_str(), R_OK) == 0) {
-    PropertyConfigurator::configureAndWatch(configFile.c_str());
-  }
-  else {
-    PatternLayoutPtr   layout(new PatternLayout("%d{HH:mm:ss} %p %c{1} - %m%n"));
-    ConsoleAppenderPtr appender(new ConsoleAppender(layout, ConsoleAppender::getSystemErr()));
-    BasicConfigurator::configure(appender);
-    Logger::getRootLogger()->setLevel(log4cxx::Level::getInfo());
-  }
+  // if (access(configFile.c_str(), R_OK) == 0) {
+  //   PropertyConfigurator::configureAndWatch(configFile.c_str());
+  // }
+  // else {
+  //   PatternLayoutPtr   layout(new PatternLayout("%d{HH:mm:ss} %p %c{1} - %m%n"));
+  //   ConsoleAppenderPtr appender(new ConsoleAppender(layout, ConsoleAppender::getSystemErr()));
+  //   BasicConfigurator::configure(appender);
+  //   Logger::getRootLogger()->setLevel(log4cxx::Level::getInfo());
+  // }
 }
 
 } // namespace log

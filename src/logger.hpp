@@ -28,7 +28,7 @@ namespace ndns {
 namespace log {
 
 void
-init(const std::string& configFile = DEFAULT_CONFIG_PATH "/" "log4cxx.properties");
+init(const std::string& configFile = " "); // DEFAULT_CONFIG_PATH "/" "log4cxx.properties");
 
 // The following has to be pre-processor defines in order to properly determine
 // log locations
@@ -36,29 +36,29 @@ init(const std::string& configFile = DEFAULT_CONFIG_PATH "/" "log4cxx.properties
 #define NDNS_LOG_INIT(name)                                             \
   static log4cxx::LoggerPtr staticModuleLogger = log4cxx::Logger::getLogger(name);
 
-#define NDNS_LOG_TRACE(x)                       \
-  LOG4CXX_TRACE(staticModuleLogger, x);
+#define NDNS_LOG_TRACE(x) do { } while (0)
+// LOG4CXX_TRACE(staticModuleLogger, x);
 
-#define NDNS_LOG_DEBUG(x)                       \
-  LOG4CXX_DEBUG(staticModuleLogger, x);
+#define NDNS_LOG_DEBUG(x) do { } while (0)                       \
+// LOG4CXX_DEBUG(staticModuleLogger, x);
 
-#define NDNS_LOG_INFO(x)                        \
-  LOG4CXX_INFO(staticModuleLogger, x);
+#define NDNS_LOG_INFO(x) do { } while (0)
+//  LOG4CXX_INFO(staticModuleLogger, x);
 
-#define NDNS_LOG_WARN(x)                        \
-  LOG4CXX_WARN(staticModuleLogger, x);
+#define NDNS_LOG_WARN(x) do { } while (0)
+//  LOG4CXX_WARN(staticModuleLogger, x);
 
-#define NDNS_LOG_ERROR(x)                       \
-  LOG4CXX_ERROR(staticModuleLogger, x);
+#define NDNS_LOG_ERROR(x) do { } while (0)
+//  LOG4CXX_ERROR(staticModuleLogger, x);
 
-#define NDNS_LOG_FATAL(x)                       \
-  LOG4CXX_FATAL(staticModuleLogger, x);
+#define NDNS_LOG_FATAL(x) do { } while (0)
+// LOG4CXX_FATAL(staticModuleLogger, x);
 
-#define NDNS_LOG_FUNCTION(x)                                            \
-  LOG4CXX_TRACE(staticModuleLogger, __FUNCTION__ << "(" << x << ")");
+#define NDNS_LOG_FUNCTION(x) do { } while (0)
+// LOG4CXX_TRACE(staticModuleLogger, __FUNCTION__ << "(" << x << ")");
 
-#define NDNS_LOG_FUNCTION_NOARGS                                \
-  LOG4CXX_TRACE(staticModuleLogger, __FUNCTION__ << "()");
+#define NDNS_LOG_FUNCTION_NOARGS do { } while (0)
+// LOG4CXX_TRACE(staticModuleLogger, __FUNCTION__ << "()");
 
 
 } // namespace log
