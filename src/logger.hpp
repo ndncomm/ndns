@@ -21,7 +21,8 @@
 #define NDNS_LOGGER_HPP
 
 #include "config.hpp"
-#include <log4cxx/logger.h>
+#include <string>
+// #include <log4cxx/logger.h>
 
 namespace ndn {
 namespace ndns {
@@ -33,13 +34,14 @@ init(const std::string& configFile = " "); // DEFAULT_CONFIG_PATH "/" "log4cxx.p
 // The following has to be pre-processor defines in order to properly determine
 // log locations
 
-#define NDNS_LOG_INIT(name)                                             \
-  static log4cxx::LoggerPtr staticModuleLogger = log4cxx::Logger::getLogger(name);
+#define NDNS_LOG_INIT(name) static int staticModuleLogger;
+//static log4cxx::LoggerPtr staticModuleLogger = log4cxx::Logger::getLogger(name);
+
 
 #define NDNS_LOG_TRACE(x) do { } while (0)
 // LOG4CXX_TRACE(staticModuleLogger, x);
 
-#define NDNS_LOG_DEBUG(x) do { } while (0)                       \
+#define NDNS_LOG_DEBUG(x) do { } while (0)
 // LOG4CXX_DEBUG(staticModuleLogger, x);
 
 #define NDNS_LOG_INFO(x) do { } while (0)
