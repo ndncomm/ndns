@@ -34,54 +34,54 @@ std::string Validator::VALIDATOR_CONF_FILE = " "; // FIXME // DEFAULT_CONFIG_PAT
 Validator::Validator(Face& face, const std::string& confFile /* = VALIDATOR_CONF_FILE */)
   : ValidatorConfig(face)
 {
-  try {
-    this->load(confFile);
-    NDNS_LOG_TRACE("Validator loads configuration: " << confFile);
-  }
-  catch (std::exception&) {
-    std::string config =
-      "rule                                                                       \n"
-      "{                                                                          \n"
-      "  id \"NDNS Validator\"                                                    \n"
-      "  for data                                                                 \n"
-      "  checker                                                                  \n"
-      "  {                                                                        \n"
-      "    type customized                                                        \n"
-      "    sig-type rsa-sha256                                                    \n"
-      "    key-locator                                                            \n"
-      "    {                                                                      \n"
-      "      type name                                                            \n"
-      "      hyper-relation                                                       \n"
-      "      {                                                                    \n"
-      "        k-regex ^(<>*)<KEY>(<>*)<><ID-CERT>$                               \n"
-      "        k-expand \\\\1\\\\2                                                \n"
-      "        h-relation is-prefix-of                                            \n"
-      "        p-regex ^(<>*)[<KEY><NDNS>](<>*)<><>$                              \n"
-      "        p-expand \\\\1\\\\2                                                \n"
-      "      }                                                                    \n"
-      "    }                                                                      \n"
-      "  }                                                                        \n"
-      "}                                                                          \n"
-      "                                                                           \n"
-      "                                                                           \n"
-      "trust-anchor                                                               \n"
-      "{                                                                          \n"
-      "  type file                                                                \n"
-      "  file-name \""
-      ;
+  // try {
+  //   this->load(confFile);
+  //   NDNS_LOG_TRACE("Validator loads configuration: " << confFile);
+  // }
+  // catch (std::exception&) {
+  //   std::string config =
+  //     "rule                                                                       \n"
+  //     "{                                                                          \n"
+  //     "  id \"NDNS Validator\"                                                    \n"
+  //     "  for data                                                                 \n"
+  //     "  checker                                                                  \n"
+  //     "  {                                                                        \n"
+  //     "    type customized                                                        \n"
+  //     "    sig-type rsa-sha256                                                    \n"
+  //     "    key-locator                                                            \n"
+  //     "    {                                                                      \n"
+  //     "      type name                                                            \n"
+  //     "      hyper-relation                                                       \n"
+  //     "      {                                                                    \n"
+  //     "        k-regex ^(<>*)<KEY>(<>*)<><ID-CERT>$                               \n"
+  //     "        k-expand \\\\1\\\\2                                                \n"
+  //     "        h-relation is-prefix-of                                            \n"
+  //     "        p-regex ^(<>*)[<KEY><NDNS>](<>*)<><>$                              \n"
+  //     "        p-expand \\\\1\\\\2                                                \n"
+  //     "      }                                                                    \n"
+  //     "    }                                                                      \n"
+  //     "  }                                                                        \n"
+  //     "}                                                                          \n"
+  //     "                                                                           \n"
+  //     "                                                                           \n"
+  //     "trust-anchor                                                               \n"
+  //     "{                                                                          \n"
+  //     "  type file                                                                \n"
+  //     "  file-name \""
+  //     ;
 
-    // FIXME
-    // config += DEFAULT_CONFIG_PATH "/" "anchors/root.cert";
+  //   // FIXME
+  //   // config += DEFAULT_CONFIG_PATH "/" "anchors/root.cert";
 
-    config +=
-      "\"                                                                         \n"
-      "}                                                                          \n"
-      "                                                                           \n"
-      ;
+  //   config +=
+  //     "\"                                                                         \n"
+  //     "}                                                                          \n"
+  //     "                                                                           \n"
+  //     ;
 
-    this->load(config, "embededConf");
-    NDNS_LOG_TRACE("Validator loads embedded configuration with anchors path: anchors/root.cert");
-  }
+  //   this->load(config, "embededConf");
+  //   NDNS_LOG_TRACE("Validator loads embedded configuration with anchors path: anchors/root.cert");
+  // }
 
 }
 
@@ -92,17 +92,20 @@ Validator::validate(const Data& data,
 {
   NDNS_LOG_TRACE("[* ?? *] verify data: " << data.getName() << ". KeyLocator: "
                  << data.getSignature().getKeyLocator().getName());
-  ValidatorConfig::validate(data,
-                            [this, onValidated] (const shared_ptr<const Data>& data) {
-                              this->onDataValidated(data);
-                              onValidated(data);
-                            },
-                            [this, onValidationFailed] (const shared_ptr<const Data>& data,
-                                                        const std::string& str) {
-                              this->onDataValidationFailed(data, str);
-                              onValidationFailed(data, str);
-                            }
-                            );
+  auto dataPtr = data.shared_from_this();
+  onDataValidated(dataPtr);
+  onValidated(dataPtr);
+  // ValidatorConfig::validate(data,
+  //                           [this, onValidated] (const shared_ptr<const Data>& data) {
+  //                             this->onDataValidated(data);
+  //                             onValidated(data);
+  //                           },
+  //                           [this, onValidationFailed] (const shared_ptr<const Data>& data,
+  //                                                       const std::string& str) {
+  //                             this->onDataValidationFailed(data, str);
+  //                             onValidationFailed(data, str);
+  //                           }
+  //                           );
 }
 
 void
