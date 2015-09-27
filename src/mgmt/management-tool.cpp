@@ -58,33 +58,33 @@ ManagementTool::createZone(const Name &zoneName,
 
   //check preconditions
   Zone zone(zoneName, cacheTtl);
-  if (m_dbMgr.find(zone)) {
-    throw Error(zoneName.toUri() + " is already presented in the NDNS db");
-  }
+  // if (m_dbMgr.find(zone)) {
+  //   throw Error(zoneName.toUri() + " is already presented in the NDNS db");
+  // }
 
-  if (!isRoot && parentZoneName.equals(zoneName)) {
-    throw Error("Parent zone name can not be the zone itself");
-  }
+  // if (!isRoot && parentZoneName.equals(zoneName)) {
+  //   throw Error("Parent zone name can not be the zone itself");
+  // }
 
-  if (!isRoot && !parentZoneName.isPrefixOf(zoneName)) {
-    throw Error(parentZoneName.toUri() + " is not a prefix of " + zoneName.toUri());
-  }
+  // if (!isRoot && !parentZoneName.isPrefixOf(zoneName)) {
+  //   throw Error(parentZoneName.toUri() + " is not a prefix of " + zoneName.toUri());
+  // }
 
-  // if dsk is provided, there is no need to check ksk
-  if (dskCertName != DEFAULT_CERT) {
-    if (!matchCertificate(dskCertName, zoneName)) {
-      throw Error("Cannot verify DSK certificate");
-    }
-  }
-  else if (kskCertName != DEFAULT_CERT) {
-    if (!matchCertificate(kskCertName, zoneName)) {
-      throw Error("Cannot verify KSK certificate");
-    }
-  }
+  // // if dsk is provided, there is no need to check ksk
+  // if (dskCertName != DEFAULT_CERT) {
+  //   if (!matchCertificate(dskCertName, zoneName)) {
+  //     throw Error("Cannot verify DSK certificate");
+  //   }
+  // }
+  // else if (kskCertName != DEFAULT_CERT) {
+  //   if (!matchCertificate(kskCertName, zoneName)) {
+  //     throw Error("Cannot verify KSK certificate");
+  //   }
+  // }
 
-  if (kskCertName == DEFAULT_CERT && isRoot) {
-    throw Error("Cannot generate KSK for root zone");
-  }
+  // if (kskCertName == DEFAULT_CERT && isRoot) {
+  //   throw Error("Cannot generate KSK for root zone");
+  // }
 
   //first generate KSK and DSK to the keyChain system, and add DSK as default
   NDNS_LOG_INFO("Start generating KSK and DSK and their corresponding certificates");
